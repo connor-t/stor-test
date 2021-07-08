@@ -1,21 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @data = BinanceService.get_klines(params[:symbol], params[:interval])
-  end
-
-  def create
-    @object = Object.new(params[:object])
-    if @object.save
-      flash[:success] = "Object successfully created"
-      redirect_to @object
-    else
-      flash[:error] = "Something went wrong"
-      render 'new'
+    @intervals = BinanceService::INTERVALS
+    @data = nil
+    @data = BinanceService.get_klines(params[:stock], params[:interval]) if params[:stock] && params[:interval]
+    respond_to do |format|
+      format.html
     end
   end
-
-  def search
-    puts params
-  end
-  
 end

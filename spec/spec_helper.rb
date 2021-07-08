@@ -13,6 +13,8 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'webmock/rspec'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -93,4 +95,13 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.before(:each) do
+    klines_response = [1624017600000, "0.00417800", "0.00418200", "0.00416100", "0.00418100", "86182.00000000", 1624021199999, "359.65325900", 325, "46738.00000000", "195.13323700", "0"]
+    stub_request(:get, "https://api.binance.com/api/v3/klines?symbol=ADABNB&interval=1h").
+    to_return(status: 200, body: klines_response.to_json)
+
+    klines_response_error = {"code"=>-1121, "msg"=>"Invalid symbol."}
+    stub_request(:get, "https://api.binance.com/api/v3/klines?symbol=ADABNBx&interval=1m").
+    to_return(status: 200, body: klines_response_error.to_json)
+  end
 end
