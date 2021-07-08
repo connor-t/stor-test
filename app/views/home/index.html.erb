@@ -1,2 +1,11 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
+<div class="row justify-content-center" data-controller="search">
+  <%= form_with url: "/", method: :get,
+      html: { data: { type: "html",
+                      action: "ajax:success->comment-list#onPostSuccess ajax:error->comment-list#onPostError" } } do |form| %>
+      <%= form.text_field :stock, hide_label: true, placeholder: "Stock Symbol", data: { target: "comment-list.text" } %>
+      <%= form.text_field :interval, hide_label: true, placeholder: "Interval" %>
+      <%= form.submit "Get data" %>
+  <% end %>
+</div>
