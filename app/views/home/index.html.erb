@@ -1,15 +1,17 @@
-<h1>Home</h1>
+<h1>Binance Klines API</h1>
 
-<div class="row justify-content-center" data-controller="search">
+<div class="search" >
   <%= form_with(url: "/", method: :get) do |form| %>
-      <%= form.text_field :stock, hide_label: true, placeholder: "Stock" %>
-      <%= form.label :interval %>
-      <%= form.select :interval, @intervals, { include_blank: true } %>
-      <%= form.submit "Search" %>
+    <%= form.text_field :stock, hide_label: true, placeholder: "Symbol", required: true %>
+    <%= form.label :interval %>
+    <%= form.select :interval, @intervals, { include_blank: true }, { required: true } %>
+    <%= form.submit "Search" %>
   <% end %>
 
-  <div>
-   <%= @data %>
-  </div>
+  <br>
 
+  <div class="response">
+    <%= "Symbol: #{params[:stock]} Interval: #{params[:interval]} Moving Average: #{@moving_average}" unless @moving_average.nil? %>
+    <%= "Error: #{@error_message}" unless @error_message.nil?%>
+  </div>
 </div>
