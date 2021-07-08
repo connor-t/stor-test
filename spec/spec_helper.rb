@@ -97,7 +97,9 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
   config.before(:each) do
-    klines_response = [1624017600000, "0.00417800", "0.00418200", "0.00416100", "0.00418100", "86182.00000000", 1624021199999, "359.65325900", 325, "46738.00000000", "195.13323700", "0"]
+    klines_response = [[1_623_985_200_000, '0.00420100', '0.00420400', '0.00416500', '0.4'],
+    [1_623_985_200_000, '0.00420100', '0.00420400', '0.00416500', '0.5'],
+    [1_623_985_200_000, '0.00420100', '0.00420400', '0.00416500', '0.6']]
     stub_request(:get, "https://api.binance.com/api/v3/klines?symbol=ADABNB&interval=1h").
     to_return(status: 200, body: klines_response.to_json)
 

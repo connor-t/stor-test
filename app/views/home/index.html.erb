@@ -1,6 +1,6 @@
 <h1>Binance Klines API</h1>
 
-<div class="search" >
+<div  id="search" >
   <%= form_with(url: "/", method: :get) do |form| %>
     <%= form.text_field :stock, hide_label: true, placeholder: "Symbol", required: true %>
     <%= form.label :interval %>
@@ -10,7 +10,7 @@
 
   <br>
 
-  <div class="response">
+  <div id="response">
     <%= "Symbol: #{params[:stock]} Interval: #{params[:interval]} Moving Average: #{@moving_average}" unless @moving_average.nil? %>
     <%= "Error: #{@error_message}" unless @error_message.nil?%>
   </div>
