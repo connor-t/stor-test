@@ -11,7 +11,11 @@
   <br>
 
   <div id="response">
-    <%= "Symbol: #{params[:stock]} Interval: #{params[:interval]} Moving Average: #{@moving_average}" unless @moving_average.nil? %>
+    <% unless @moving_average.nil? %>
+      <%= "Symbol: #{params[:stock]}" %> <br>
+      <%= "Interval: #{params[:interval]}" %> <br>
+      <%= "Moving Average: #{@moving_average}" %>
+    <% end %>
     <%= "Error: #{@error_message}" unless @error_message.nil?%>
   </div>
 </div>
